@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="94">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>BoardCoord.h</itemPath>
+      <itemPath>BoardCoords.h</itemPath>
+      <itemPath>MovesTable.h</itemPath>
+      <itemPath>Solver.h</itemPath>
+      <itemPath>Sudoku.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>BoardCoord.cpp</itemPath>
+      <itemPath>BoardCoords.cpp</itemPath>
+      <itemPath>MovesTable.cpp</itemPath>
+      <itemPath>Solver.cpp</itemPath>
+      <itemPath>Sudoku.cpp</itemPath>
+      <itemPath>main.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+      </compileType>
+      <item path="BoardCoord.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="BoardCoord.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="BoardCoords.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="BoardCoords.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="MovesTable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="MovesTable.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Solver.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Solver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Sudoku.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Sudoku.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="BoardCoord.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="BoardCoord.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="BoardCoords.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="BoardCoords.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="MovesTable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="MovesTable.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Solver.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Solver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Sudoku.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Sudoku.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
