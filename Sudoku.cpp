@@ -12,8 +12,6 @@
 
 using namespace std;
 
-
-
 Board::Board(int d) {
 	if(d > 62)
 		throw ("Dimensions must be at most 62");

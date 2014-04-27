@@ -4,19 +4,24 @@
  *
  * Created on April 22, 2014, 1:30 PM
  */
-
+#include <vector>
+#include "Sudoku.h"
 #ifndef MOVESTABLE_H
 #define	MOVESTABLE_H
 
 
 class MovesTable {
     int size;
-    int** moveTable;
+   
 public:
+     vector <vector <vector <int> > > moveTable;
     MovesTable(int);
     ~MovesTable();
     vector<int> LegalMoves(int, int);
-    void UpdateMoves(int, int);
+    void InitializeTable(Board*);
+    void UpdateRow(int, int);
+    void UpdateColumn(int, int); 
+    void UpdateBox(int, int, int);
     
     
 };
