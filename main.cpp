@@ -21,7 +21,8 @@ int main(int argc, char* argv[])
    
     Board * b = new Board(4);
     mt.setValue(b, 0, 0, 3);
-    mt.setValue(b, 0, 1, 2);
+    mt.setValue(b, 0, 3, 2);
+    mt.setValue(b, 2, 1, 2);
     
     mt.InitializeTable(b);
     

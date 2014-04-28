@@ -70,7 +70,7 @@ void MovesTable::InitializeTable(Board* b) {
 
 void MovesTable::UpdateRow(int con, int r) {
     for(int j = 0; j < size; j++) {
-        for(int k = moveTable[r][j].size() - 1; k > 0 ; k--) {
+        for(int k = (int) moveTable[r][j].size() - 1; k > 0 ; k--) {
             if(moveTable[r][j][k] == con)
                 moveTable[r][j].erase(moveTable[r][j].begin() + k);
         }
@@ -79,7 +79,7 @@ void MovesTable::UpdateRow(int con, int r) {
 
 void MovesTable::UpdateColumn(int con, int c) {
     for(int i = 0; i < size; i++) {
-        for (int k = moveTable[i][c].size() - 1; k > 0; k--) {
+        for (int k = (int) moveTable[i][c].size() - 1; k > 0; k--) {
             if(moveTable[i][c][k] == con)
                 moveTable[i][c].erase(moveTable[i][c].begin() + k);
         }
@@ -128,6 +128,16 @@ bool MovesTable::MinRemaingValue(int &r, int &c) {
                 row = i;
                 col = j;
             }
+            
+            else if (moveTable[i][j][0] != -1 && moveTable[i][j].size() == moveTable[row][col].size()) {
+                int newTest = Constraints(i, j);
+                int oldTest = Constraints(row, col);
+                
+                if (newTest > oldTest) {
+                    row = i;
+                    col = j;
+                }
+            }
         }
     }
     
@@ -135,4 +145,37 @@ bool MovesTable::MinRemaingValue(int &r, int &c) {
     c = col;
     
     return worked;
+}
+
+int MovesTable::Constraints(int r, int c) {
+    int count = 0;
+    //Row Search
+    for (int j = 0; j < size; j++) {
+        if (moveTable[r][j][0] != -1) {
+            count++;
+        }
+    }
+    
+    //Column Search
+    for (int i = 0; i < size; i++) {
+        if (moveTable[i][c][0] != -1) {
+            count++;
+        }
+    }
+    
+    //Box Search
+    int sq = (int) sqrt(size);
+    int row = r/sq;
+    row *= sq;
+    int col = c/sq;
+    col *= sq;
+    
+    for (int i = row; i < row + sq; i++) {
+        for (int j = col; j < col + sq; j++) {
+            if(i != r && j != c && moveTable[i][j][0] != -1)
+                count++;
+        }
+    }
+    
+    return count;
 }
