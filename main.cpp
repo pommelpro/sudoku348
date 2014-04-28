@@ -25,6 +25,13 @@ int main(int argc, char* argv[])
     
     mt.InitializeTable(b);
     
+    int row, col;
+    bool check = mt.MinRemaingValue(row, col);
+    if(check)
+        cout << "yee" << '\n';
+    cout << "Row: " << row << "   Col: " << col << '\n';
+    
+    
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++) {
             for(int k = 0; k < mt.moveTable[i][j].size(); k++) {

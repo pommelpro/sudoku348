@@ -23,7 +23,6 @@ using namespace std;
 
 
 MovesTable::MovesTable(int s) {
-    cout << "hey";
     size = s;
     moveTable.resize(size);
     for(int i = 0; i < size; i++) {
@@ -45,7 +44,6 @@ vector<int> MovesTable::LegalMoves(int r, int c) {
 }
 
 void MovesTable::InitializeTable(Board* b) {
-    cout << "hey";
     for (int i = 0; i < size; i++) {
         int* holder = new int[size];
         int* colArray = new int[size];
@@ -97,7 +95,6 @@ void MovesTable::UpdateBox(int con, int r, int c) {
     
     for (int i = row; i < row + sq; i++) {
         for (int j = col; j < col + sq; j++) {
-            cout << moveTable[i][j].size() << '\n';
             for (int k = (int) moveTable[i][j].size() - 1; k > 0; k--) {
                 if (moveTable[i][j][k] == con) {
                      moveTable[i][j].erase(moveTable[i][j].begin() + k);
@@ -112,4 +109,30 @@ void MovesTable::setValue(Board* b, int r, int c, int con) {
     b->set_square_value(r + 1, c + 1, con);
     moveTable[r][c].clear();
     moveTable[r][c].push_back(-1);
+}
+
+bool MovesTable::MinRemaingValue(int &r, int &c) {
+    int row = 0;
+    int col = 0;
+  
+    bool worked = false;
+    
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            if (moveTable[i][j][0] != -1 && !worked) {
+                worked = true;
+                row = i;
+                col = j;
+            }
+            else if (moveTable[i][j][0] != -1 && worked && moveTable[i][j].size() < moveTable[row][col].size()) {
+                row = i;
+                col = j;
+            }
+        }
+    }
+    
+    r = row;
+    c = col;
+    
+    return worked;
 }
