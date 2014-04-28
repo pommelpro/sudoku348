@@ -1,3 +1,11 @@
+//
+//  MovesTable.cpp
+//  Sudoku
+//
+//  Created by Nick Scoliard on 4/28/14.
+//  Copyright (c) 2014 Nick Scoliard. All rights reserved.
+//
+
 #include<iostream>
 #include<fstream>
 #include<sstream>
@@ -25,8 +33,8 @@ MovesTable::MovesTable(int s) {
                 moveTable[i][j].push_back(k + 1);
             }
         }
-    }              
-}   
+    }
+}
 
 MovesTable::~MovesTable() {
     
@@ -66,7 +74,7 @@ void MovesTable::UpdateRow(int con, int r) {
     for(int j = 0; j < size; j++) {
         for(int k = moveTable[r][j].size() - 1; k > 0 ; k--) {
             if(moveTable[r][j][k] == con)
-                moveTable.erase(moveTable.begin() + k);
+                moveTable[r][j].erase(moveTable[r][j].begin() + k);
         }
     }
 }
@@ -75,7 +83,7 @@ void MovesTable::UpdateColumn(int con, int c) {
     for(int i = 0; i < size; i++) {
         for (int k = moveTable[i][c].size() - 1; k > 0; k--) {
             if(moveTable[i][c][k] == con)
-                moveTable.erase(moveTable.begin() + k);
+                moveTable[i][c].erase(moveTable[i][c].begin() + k);
         }
     }
 }
@@ -89,9 +97,19 @@ void MovesTable::UpdateBox(int con, int r, int c) {
     
     for (int i = row; i < row + sq; i++) {
         for (int j = col; j < col + sq; j++) {
-            for (int k = moveTable[i][j].size() - 1; k > 0; k--) {
-                moveTable.erase(moveTable.begin() + k);
+            cout << moveTable[i][j].size() << '\n';
+            for (int k = (int) moveTable[i][j].size() - 1; k > 0; k--) {
+                if (moveTable[i][j][k] == con) {
+                     moveTable[i][j].erase(moveTable[i][j].begin() + k);
+                }
+               
             }
         }
     }
+}
+
+void MovesTable::setValue(Board* b, int r, int c, int con) {
+    b->set_square_value(r + 1, c + 1, con);
+    moveTable[r][c].clear();
+    moveTable[r][c].push_back(-1);
 }

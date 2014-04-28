@@ -1,33 +1,37 @@
-/* 
- * File:   main.cpp
- * Author: Nick
- *
- * Created on April 21, 2014, 2:34 PM
- */
+//
+//  main.cpp
+//  Sudoku
+//
+//  Created by Nick Scoliard on 4/28/14.
+//  Copyright (c) 2014 Nick Scoliard. All rights reserved.
+//
 
+#include <iostream>
 using namespace std;
 #include "MovesTable.h"
 
 /*
- * 
+ *
  */
 
 int main(int argc, char* argv[])
 {
-   
+ 
     MovesTable mt = MovesTable(4);
+   
     Board * b = new Board(4);
-     b->set_square_value(1, 1, 3);
-     b->set_square_value(1, 2, 2);
-     
+    mt.setValue(b, 0, 0, 3);
+    mt.setValue(b, 0, 1, 2);
+    
     mt.InitializeTable(b);
     
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++) {
-            for(int k = 0; k < 4; k++) {
-                cout << mt.moveTable[i][j][k];                     
+            for(int k = 0; k < mt.moveTable[i][j].size(); k++) {
+                cout << mt.moveTable[i][j][k];
             }
             cout << '\n';
         }
     }
 }
+
