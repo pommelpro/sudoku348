@@ -17,13 +17,9 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    Board * b = Board::fromFile("4x4.txt");
+    Board * b = Board::fromFile("9x9.txt");
     
-    b->set_square_value(1, 2, 2);
-    b->set_square_value(2, 4, 2);
-    b->set_square_value(3, 2, 3);
-    b->set_square_value(3, 3, 4);
-    b->set_square_value(4, 1, 4);
+    cout << b->toString() << '\n';
     
     bool check = BackTrack(b);
     

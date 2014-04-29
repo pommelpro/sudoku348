@@ -26,20 +26,38 @@ bool BackTrackRecur(Board* b, MovesTable mt) {
         return true;
     }
     
+
     int row, col;
     
     mt.MinRemainingValue(row, col);
     
+    
+    
     vector<int> testVec = mt.LegalMoves(row, col);
     
     for (int i = 0; i < testVec.size(); i++) {
+        if(row == 1 && col == 3) {
+            cout << b->toString();
+        }
+        
         mt.setValue(b, row, col, testVec[i]);
         
+        
+        cout << "Row :" << row +  1<< " Col: " << col + 1 << " Num: " << testVec[i] << '\n' << '\n';
+        
+        if (!mt.ForwardChecking()) {
+             b->set_square_value(row + 1, col + 1, 0);
+            return false;
+        }
+        
         bool result = BackTrackRecur(b, mt);
+        
+        
         
         if (result) {
             return true;
         }
+        
         
         b->set_square_value(row + 1, col + 1, 0);
         
