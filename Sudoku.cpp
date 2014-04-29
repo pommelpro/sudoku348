@@ -53,6 +53,7 @@ string Board::toString() {
 
 void Board::set_square_value(int row, int col, int val) {
 	cells[row-1][col-1] = val;
+    totalChecks++;
 }
 
 int Board::get_square_value(int row, int col) {

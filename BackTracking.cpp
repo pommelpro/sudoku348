@@ -29,21 +29,21 @@ bool BackTrackRecur(Board* b, MovesTable mt) {
 
     int row, col;
     
-    mt.MinRemainingValue(row, col);
+    //mt.MinRemainingValue(row, col);
+    
+    mt.NextRemainingValue(row, col);
     
     
     
     vector<int> testVec = mt.LegalMoves(row, col);
     
-    for (int i = 0; i < testVec.size(); i++) {
-        if(row == 1 && col == 3) {
-            cout << b->toString();
-        }
+    vector<int>leastVec = mt.LeastConstraingVal(row, col);
+    
+    
+    for (int i = 0; i < leastVec.size(); i++) {
+        cout << "Row: " << row << " Col: " << col << " Num: " << testVec[i] << '\n';
         
         mt.setValue(b, row, col, testVec[i]);
-        
-        
-        cout << "Row :" << row +  1<< " Col: " << col + 1 << " Num: " << testVec[i] << '\n' << '\n';
         
         if (!mt.ForwardChecking()) {
              b->set_square_value(row + 1, col + 1, 0);

@@ -31,6 +31,8 @@ public:
     int Constraints(int, int);
     bool ForwardChecking();
     int getSize() { return size; };
+    vector<int> LeastConstraingVal(int, int);
+    bool NextRemainingValue(int &r, int &c);
 };
 
 

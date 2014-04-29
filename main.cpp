@@ -25,7 +25,8 @@ int main(int argc, char* argv[])
     
     if (check) {
         cout << "yeeeeee" << '\n';
-        cout << b->toString();
+        cout << b->toString() << '\n';
+        cout << b->get_totalChecks();
     }
     
 }

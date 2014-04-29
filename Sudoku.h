@@ -32,6 +32,7 @@ public:
 	static Board* fromFile(string);
 	bool checkForVictory();
 	int get_dim() {return dim;}
+    long get_totalChecks() {return totalChecks;}
     bool checkEmpty();
 };
 

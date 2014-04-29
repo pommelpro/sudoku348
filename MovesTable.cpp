@@ -208,3 +208,95 @@ bool MovesTable::ForwardChecking() {
     
     return true;
 }
+
+vector<int> MovesTable::LeastConstraingVal(int r, int c) {
+    if (moveTable[r][c].size() < 2) {
+        vector<int> test;
+        test.push_back(moveTable[r][c][0]);
+        return test;
+    }
+    
+    vector<int> best;
+    best.resize(moveTable[r][c].size());
+    vector<int> constArr;
+    constArr.resize(moveTable[r][c].size());
+    
+    
+    
+    for (int count = 0; count < moveTable[r][c].size(); count++) {
+        int con = moveTable[r][c][count];
+        int testConst = 0;
+        
+        //Row Search
+        for (int j = 0; j < size; j++) {
+            for (int k = 0; k < moveTable[r][j].size(); k++) {
+                if (moveTable[r][j][k] == con) {
+                    testConst++;
+                    break;
+                }
+            }
+        }
+        
+        //Column Search
+        for (int i = 0; i < size; i++) {
+            for (int k = 0; k < moveTable[i][c].size(); k++) {
+                if (moveTable[i][c][k] == con) {
+                    testConst++;
+                    break;
+                }
+            }
+        }
+        
+        //Box Search
+        int sq = (int) sqrt(size);
+        int row = r/sq;
+        row *= sq;
+        int col = c/sq;
+        col *= sq;
+        
+        for (int i = row; i < row + sq; i++) {
+            for (int j = col; j < col + sq; j++) {
+                for (int k = 0; k < moveTable[i][j].size() ; k++) {
+                    if (i != r && j != c && moveTable[i][j][k] == con) {
+                        testConst++;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if (count == 0) {
+            best[0] = con;
+            constArr[0] = testConst;
+        }
+        else {
+            for (int i = 0; i <= count; i++) {
+                if (testConst < constArr[i] || constArr[i] == 0) {
+                    best.insert(best.begin() + i, con);
+                    best.pop_back();
+                    constArr.insert(constArr.begin() + i, testConst);
+                    constArr.pop_back();
+                    break;
+                    
+                }
+            }
+        }
+
+    }
+    
+    return best;
+}
+
+bool MovesTable::NextRemainingValue(int &r, int &c) {
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            if (moveTable[i][j].size() > 0 && moveTable[i][j][0] != -1) {
+                r = i;
+                c = j;
+                return true;
+            }
+        }
+    }
+    
+    return false;
+}
