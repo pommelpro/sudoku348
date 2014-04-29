@@ -7,8 +7,9 @@
 //
 
 #include <iostream>
+#include <fstream>
 using namespace std;
-#include "MovesTable.h"
+#include "BackTracking.h"
 
 /*
  *
@@ -16,33 +17,19 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
- 
-    MovesTable mt = MovesTable(4);
-   
-    Board * b = new Board(4);
-    mt.setValue(b, 0, 0, 3);
-    mt.setValue(b, 0, 3, 2);
-    mt.setValue(b, 1, 1, 1);
-    mt.setValue(b, 2, 1, 4);
+    Board * b = Board::fromFile("4x4.txt");
     
-    bool check = mt.ForwardChecking();
+    b->set_square_value(1, 2, 2);
+    b->set_square_value(2, 4, 2);
+    b->set_square_value(3, 2, 3);
+    b->set_square_value(3, 3, 4);
+    b->set_square_value(4, 1, 4);
     
-    cout << "Check : " << check << '\n';
+    bool check = BackTrack(b);
     
-    int row, col;
-    bool MRVcheck = mt.MinRemainingValue(row, col);
-    if(MRVcheck)
-        cout << "yee" << '\n';
-    cout << "Row: " << row << "   Col: " << col << '\n';
-    
-    
-    for(int i = 0; i < 4; i++) {
-        for(int j = 0; j < 4; j++) {
-            for(int k = 0; k < mt.moveTable[i][j].size(); k++) {
-                cout << mt.moveTable[i][j][k];
-            }
-            cout << '\n';
-        }
+    if (check) {
+        cout << "yeeeeee" << '\n';
+        cout << b->toString();
     }
     
 }

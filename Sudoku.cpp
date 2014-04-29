@@ -1,4 +1,9 @@
-// Sudoku.cpp : Basic class for holding a Sudoku board, reading a board from files, a writing a board to the screen
+//
+//  Sudoku.cpp
+//  Sudoku
+//
+//  Created by Nick Scoliard on 4/28/14.
+//  Copyright (c) 2014 Nick Scoliard. All rights reserved.
 //
 
 #include<iostream>
@@ -55,28 +60,28 @@ int Board::get_square_value(int row, int col) {
 }
 
 Board * Board::fromFile(string inFileName) {
-  string line;
-  ifstream inFile (inFileName.c_str());
-  Board * out;
-  if (inFile.is_open()) {
-	  getline (inFile,line);
-	  int d = atoi(line.c_str());
-	  out = new Board(d);
-	  getline (inFile, line);
-	  int numVals = atoi(line.c_str());
-	  for(int i=0; i<numVals;i++) {
-		string field;
-		getline (inFile,field, '\t');
-		int row = atoi(field.c_str());
-		getline (inFile,field, '\t');
-		int col = atoi(field.c_str());
-		getline (inFile,field);
-		int val = atoi(field.c_str());
-		out->set_square_value(row, col, val);
-	  }
-  }
-  inFile.close();
-  return out;
+    string line;
+    ifstream inFile (inFileName.c_str());
+    Board * out;
+    if (inFile.is_open()) {
+        getline (inFile,line);
+        int d = atoi(line.c_str());
+        out = new Board(d);
+        getline (inFile, line);
+        int numVals = atoi(line.c_str());
+        for(int i=0; i<numVals;i++) {
+            string field;
+            getline (inFile,field, '\t');
+            int row = atoi(field.c_str());
+            getline (inFile,field, '\t');
+            int col = atoi(field.c_str());
+            getline (inFile,field);
+            int val = atoi(field.c_str());
+            out->set_square_value(row, col, val);
+        }
+    }
+    inFile.close();
+    return out;
 }
 
 bool Board::checkForVictory() {
@@ -86,7 +91,7 @@ bool Board::checkForVictory() {
 		for(int j=1;j<dim+1;j++)
 			if(this->get_square_value(i,j)==0)
 				return false;
-	for(int i=1; i<dim+1; i++) 
+	for(int i=1; i<dim+1; i++)
 		victory += 1 << i;
 	//check rows and columns:
 	for(int i=1; i<dim+1;i++) {
@@ -118,3 +123,18 @@ bool Board::checkForVictory() {
 	}
 	return true;
 }
+
+bool Board::checkEmpty() {
+    for (int i = 0; i < dim; i++) {
+        for (int j = 0; j < dim; j++) {
+            if (get_square_value(i + 1, j + 1) != 0) {
+                return true;
+            }
+        }
+    }
+    
+    return false;
+}
+
+
+

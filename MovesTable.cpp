@@ -45,11 +45,21 @@ vector<int> MovesTable::LegalMoves(int r, int c) {
 
 void MovesTable::InitializeTable(Board* b) {
     for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            int con = b->get_square_value(i + 1, j + 1);
+            if (con != 0) {
+                setValue(b, i, j, con);
+            }
+        }
+    }
+    
+    /*
+    for (int i = 0; i < size; i++) {
         int* holder = (int *)malloc(size * sizeof(int));
         int* colArray = (int *)malloc(size * sizeof(int));
         int c = 0;
         for (int j = 0; j < size; j++) {
-            int test = b->get_square_value(i + 1, j + 1);
+            int test = b.get_square_value(i + 1, j + 1);
             if(test > 0) {
                 holder[c] = test;
                 colArray[c] = j;
@@ -66,7 +76,7 @@ void MovesTable::InitializeTable(Board* b) {
             }
         }
         
-    }
+    }*/
 }
 
 void MovesTable::UpdateRow(int con, int r) {
@@ -108,8 +118,10 @@ void MovesTable::UpdateBox(int con, int r, int c) {
 
 void MovesTable::setValue(Board* b, int r, int c, int con) {
     b->set_square_value(r + 1, c + 1, con);
+    
     moveTable[r][c].clear();
     moveTable[r][c].push_back(-1);
+    
     
     UpdateRow(con, r);
     UpdateColumn(con, c);

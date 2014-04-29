@@ -1,12 +1,13 @@
-/* 
- * File:   Sudoku.h
- * Author: Nick
- *
- * Created on April 22, 2014, 1:18 PM
- */
+//
+//  Sudoku.h
+//  Sudoku
+//
+//  Created by Nick Scoliard on 4/28/14.
+//  Copyright (c) 2014 Nick Scoliard. All rights reserved.
+//
 
-#ifndef SUDOKU_H
-#define	SUDOKU_H
+#ifndef __Sudoku__Sudoku__
+#define __Sudoku__Sudoku__
 
 #include<iostream>
 #include<fstream>
@@ -31,8 +32,7 @@ public:
 	static Board* fromFile(string);
 	bool checkForVictory();
 	int get_dim() {return dim;}
+    bool checkEmpty();
 };
 
-
-#endif	/* SUDOKU_H */
-
+#endif /* defined(__Sudoku__Sudoku__) */

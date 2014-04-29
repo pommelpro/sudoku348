@@ -26,10 +26,11 @@ public:
     void UpdateRow(int, int);
     void UpdateColumn(int, int);
     void UpdateBox(int, int, int);
-    void setValue(Board*, int, int, int);
+    void setValue(Board* b, int, int, int);
     bool MinRemainingValue(int &r, int &c);
     int Constraints(int, int);
     bool ForwardChecking();
+    int getSize() { return size; };
 };
 
 
