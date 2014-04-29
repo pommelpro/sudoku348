@@ -110,6 +110,10 @@ void MovesTable::setValue(Board* b, int r, int c, int con) {
     b->set_square_value(r + 1, c + 1, con);
     moveTable[r][c].clear();
     moveTable[r][c].push_back(-1);
+    
+    UpdateRow(con, r);
+    UpdateColumn(con, c);
+    UpdateBox(con, r, c);
 }
 
 bool MovesTable::MinRemainingValue(int &r, int &c) {

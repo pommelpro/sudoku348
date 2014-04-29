@@ -24,9 +24,6 @@ int main(int argc, char* argv[])
     mt.setValue(b, 0, 3, 2);
     mt.setValue(b, 1, 1, 1);
     mt.setValue(b, 2, 1, 4);
-
-    
-    mt.InitializeTable(b);
     
     bool check = mt.ForwardChecking();
     
