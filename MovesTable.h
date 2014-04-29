@@ -27,8 +27,9 @@ public:
     void UpdateColumn(int, int);
     void UpdateBox(int, int, int);
     void setValue(Board*, int, int, int);
-    bool MinRemaingValue(int &r, int &c);
+    bool MinRemainingValue(int &r, int &c);
     int Constraints(int, int);
+    bool ForwardChecking();
 };
 
 

@@ -22,13 +22,19 @@ int main(int argc, char* argv[])
     Board * b = new Board(4);
     mt.setValue(b, 0, 0, 3);
     mt.setValue(b, 0, 3, 2);
-    mt.setValue(b, 2, 1, 2);
+    mt.setValue(b, 1, 1, 1);
+    mt.setValue(b, 2, 1, 4);
+
     
     mt.InitializeTable(b);
     
+    bool check = mt.ForwardChecking();
+    
+    cout << "Check : " << check << '\n';
+    
     int row, col;
-    bool check = mt.MinRemaingValue(row, col);
-    if(check)
+    bool MRVcheck = mt.MinRemainingValue(row, col);
+    if(MRVcheck)
         cout << "yee" << '\n';
     cout << "Row: " << row << "   Col: " << col << '\n';
     
@@ -41,5 +47,6 @@ int main(int argc, char* argv[])
             cout << '\n';
         }
     }
+    
 }
 

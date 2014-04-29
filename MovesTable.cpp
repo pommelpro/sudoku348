@@ -16,7 +16,7 @@
 #include<string>
 #include<math.h>
 #include <vector>
-#include  <algorithm>
+#include <algorithm>
 #include <cmath>
 
 using namespace std;
@@ -45,8 +45,8 @@ vector<int> MovesTable::LegalMoves(int r, int c) {
 
 void MovesTable::InitializeTable(Board* b) {
     for (int i = 0; i < size; i++) {
-        int* holder = new int[size];
-        int* colArray = new int[size];
+        int* holder = (int *)malloc(size * sizeof(int));
+        int* colArray = (int *)malloc(size * sizeof(int));
         int c = 0;
         for (int j = 0; j < size; j++) {
             int test = b->get_square_value(i + 1, j + 1);
@@ -58,10 +58,11 @@ void MovesTable::InitializeTable(Board* b) {
         }
         
         for (int j = 0; j < size; j++) {
-            if(holder[j]) {
-                UpdateRow(holder[j], i);
-                UpdateColumn(holder[j], colArray[j]);
-                UpdateBox(holder[j], i, colArray[j]);
+            int constraint = holder[j];
+            if(constraint) {
+                UpdateRow(constraint, i);
+                UpdateColumn(constraint, colArray[j]);
+                UpdateBox(constraint, i, colArray[j]);
             }
         }
         
@@ -70,7 +71,7 @@ void MovesTable::InitializeTable(Board* b) {
 
 void MovesTable::UpdateRow(int con, int r) {
     for(int j = 0; j < size; j++) {
-        for(int k = (int) moveTable[r][j].size() - 1; k > 0 ; k--) {
+        for(int k = (int) moveTable[r][j].size() - 1; k >= 0 ; k--) {
             if(moveTable[r][j][k] == con)
                 moveTable[r][j].erase(moveTable[r][j].begin() + k);
         }
@@ -79,7 +80,7 @@ void MovesTable::UpdateRow(int con, int r) {
 
 void MovesTable::UpdateColumn(int con, int c) {
     for(int i = 0; i < size; i++) {
-        for (int k = (int) moveTable[i][c].size() - 1; k > 0; k--) {
+        for (int k = (int) moveTable[i][c].size() - 1; k >= 0; k--) {
             if(moveTable[i][c][k] == con)
                 moveTable[i][c].erase(moveTable[i][c].begin() + k);
         }
@@ -95,7 +96,7 @@ void MovesTable::UpdateBox(int con, int r, int c) {
     
     for (int i = row; i < row + sq; i++) {
         for (int j = col; j < col + sq; j++) {
-            for (int k = (int) moveTable[i][j].size() - 1; k > 0; k--) {
+            for (int k = (int) moveTable[i][j].size() - 1; k >= 0; k--) {
                 if (moveTable[i][j][k] == con) {
                      moveTable[i][j].erase(moveTable[i][j].begin() + k);
                 }
@@ -111,7 +112,7 @@ void MovesTable::setValue(Board* b, int r, int c, int con) {
     moveTable[r][c].push_back(-1);
 }
 
-bool MovesTable::MinRemaingValue(int &r, int &c) {
+bool MovesTable::MinRemainingValue(int &r, int &c) {
     int row = 0;
     int col = 0;
   
@@ -178,4 +179,16 @@ int MovesTable::Constraints(int r, int c) {
     }
     
     return count;
+}
+
+bool MovesTable::ForwardChecking() {
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            if (moveTable[i][j].size() == 0) {
+                return false;
+            }
+        }
+    }
+    
+    return true;
 }
