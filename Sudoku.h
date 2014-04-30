@@ -1,10 +1,7 @@
 //
 //  Sudoku.h
 //  Sudoku
-//
-//  Created by Nick Scoliard on 4/28/14.
-//  Copyright (c) 2014 Nick Scoliard. All rights reserved.
-//
+
 
 #ifndef __Sudoku__Sudoku__
 #define __Sudoku__Sudoku__
@@ -20,9 +17,11 @@
 using namespace std;
 
 class Board {
+    bool million;
 	int dim;
 	int ** cells;
 	long totalChecks;
+    time_t timeStart;
 public:
 	Board (int);
 	~Board();

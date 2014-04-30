@@ -1,10 +1,7 @@
 //
 //  MovesTable.h
 //  Sudoku
-//
-//  Created by Nick Scoliard on 4/28/14.
-//  Copyright (c) 2014 Nick Scoliard. All rights reserved.
-//
+
 
 #ifndef __Sudoku__MovesTable__
 #define __Sudoku__MovesTable__

@@ -1,10 +1,7 @@
 //
 //  MovesTable.cpp
 //  Sudoku
-//
-//  Created by Nick Scoliard on 4/28/14.
-//  Copyright (c) 2014 Nick Scoliard. All rights reserved.
-//
+
 
 #include<iostream>
 #include<fstream>
@@ -290,6 +287,9 @@ vector<int> MovesTable::LeastConstraingVal(int r, int c) {
 bool MovesTable::NextRemainingValue(int &r, int &c) {
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
+            if (moveTable[i][j].size() == 0) {
+                return false;
+            }
             if (moveTable[i][j].size() > 0 && moveTable[i][j][0] != -1) {
                 r = i;
                 c = j;

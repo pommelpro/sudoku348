@@ -1,10 +1,7 @@
 //
 //  Sudoku.cpp
 //  Sudoku
-//
-//  Created by Nick Scoliard on 4/28/14.
-//  Copyright (c) 2014 Nick Scoliard. All rights reserved.
-//
+
 
 #include<iostream>
 #include<fstream>
@@ -28,6 +25,8 @@ Board::Board(int d) {
 			cells[i][j] = 0;
 	}
 	totalChecks = 0;
+    million = false;
+    timeStart = time(nullptr);
 }
 
 Board::~Board() {
@@ -54,6 +53,19 @@ string Board::toString() {
 void Board::set_square_value(int row, int col, int val) {
 	cells[row-1][col-1] = val;
     totalChecks++;
+    if (totalChecks > 15000000) {
+        string error = "\nTerminated after ";
+        error += to_string(totalChecks);
+        error += " consistency checks  ";
+        error += "\nTime Taken: ";
+        time_t timeEnd = time(nullptr);
+        time_t timeTaken = timeEnd - timeStart;
+        error += to_string(timeTaken/60);
+        error += " minutes";
+        cout << error <<'\n';
+        throw (error);
+    }
+    //cout << "Total Check: " << totalChecks << '\n';
 }
 
 int Board::get_square_value(int row, int col) {

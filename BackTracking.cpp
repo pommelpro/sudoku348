@@ -1,10 +1,7 @@
 //
 //  BackTracking.cpp
 //  Sudoku
-//
-//  Created by Nick Scoliard on 4/28/14.
-//  Copyright (c) 2014 Nick Scoliard. All rights reserved.
-//
+
 
 #include "BackTracking.h"
 
@@ -29,25 +26,39 @@ bool BackTrackRecur(Board* b, MovesTable mt) {
 
     int row, col;
     
-    //mt.MinRemainingValue(row, col);
+    //MRV + MCV Heuristic
     
-    mt.NextRemainingValue(row, col);
+    mt.MinRemainingValue(row, col);
+    
+    //Without MRV heuristic
+    
+    //if(!mt.NextRemainingValue(row, col)) {
+    //    return false;
+    //}
     
     
+    //Without LCV heuristic
+    //vector<int> testVec = mt.LegalMoves(row, col);
     
-    vector<int> testVec = mt.LegalMoves(row, col);
-    
+    //LCV heuristic
     vector<int>leastVec = mt.LeastConstraingVal(row, col);
     
     
     for (int i = 0; i < leastVec.size(); i++) {
-        cout << "Row: " << row << " Col: " << col << " Num: " << testVec[i] << '\n';
         
-        mt.setValue(b, row, col, testVec[i]);
         
+        mt.setValue(b, row, col, leastVec[i]);
+    
+        
+        
+        
+        //Forward Checking
         if (!mt.ForwardChecking()) {
-             b->set_square_value(row + 1, col + 1, 0);
-            return false;
+            b->set_square_value(row + 1, col + 1, 0);
+            mt = MovesTable(b->get_dim());
+            mt.InitializeTable(b);
+        
+            continue;
         }
         
         bool result = BackTrackRecur(b, mt);
